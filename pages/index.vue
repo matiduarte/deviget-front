@@ -1,16 +1,16 @@
 <template>
-  <div class="container">
-    <div v-for="(top, index) in tops" :key="index">
-      <img :src="top.thumbnail" :alt="top.title">
-    </div>
-  </div>
+  <post-list :posts="tops" />
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import PostList from '~/components/PostList.vue';
 
 export default {
   name: 'Home',
+  components: {
+    PostList,
+  },
   async asyncData({ store: { dispatch } }) {
     return dispatch('getTopPosts');
   },
@@ -22,9 +22,6 @@ export default {
 
 <style>
 .container {
-  margin: 82px auto 32px;
-  padding: 0 16px;
-  max-width: 960px;
   align-items: center;
   min-height: 100vh;
   display: flex;
