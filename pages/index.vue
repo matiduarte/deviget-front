@@ -1,50 +1,34 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        deviget-front
-      </h1>
-      <h2 class="subtitle">
-        Deviget challenge
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div v-for="(top, index) in tops" :key="index">
+      <img :src="top.thumbnail" :alt="top.title">
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
+import { mapState } from 'vuex';
 
 export default {
-  components: {
-    Logo,
+  name: 'Home',
+  async asyncData({ store: { dispatch } }) {
+    return dispatch('getTopPosts');
+  },
+  computed: {
+    ...mapState(['tops']),
   },
 };
 </script>
 
 <style>
 .container {
-  margin: 0 auto;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  align-items: center;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
