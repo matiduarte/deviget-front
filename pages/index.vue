@@ -1,15 +1,20 @@
 <template>
-  <post-list :posts="tops" />
+  <div class="parent">
+    <post-list class="item" :posts="tops" />
+    <post-detail class="item last" />
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 import PostList from '~/components/PostList.vue';
+import PostDetail from '~/components/PostDetail.vue';
 
 export default {
   name: 'Home',
   components: {
     PostList,
+    PostDetail,
   },
   async asyncData({ store: { dispatch } }) {
     return dispatch('getTopPosts');
@@ -26,6 +31,7 @@ export default {
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  overflow: hidden;
   text-align: center;
 }
 
@@ -50,4 +56,41 @@ export default {
 .links {
   padding-top: 15px;
 }
+
+</style>
+
+<style scoped>
+  .parent {
+    display: flex;
+  }
+
+  .item {
+    width: 50%;
+    color: #fff;
+    background: #fff;
+    box-shadow: 1px 2px 12px 0 rgba(102, 107, 135, 0.27);
+  }
+
+  .last {
+    width: 50%;
+    color: #222;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 600px){
+
+    .parent {
+      flex-direction: column-reverse;
+    }
+
+    .item {
+      width: auto;
+      min-height: 200px;
+    }
+
+    .last {
+      background: #fff;
+    }
+
+  }
 </style>

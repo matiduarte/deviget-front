@@ -1,6 +1,9 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
+  <nav class="sticky-header navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand" style="align-items: center">
+      <div style="height: 40px; width: 40px; margin-left: 5px">
+        <img src="~/assets/reddit.png" alt="icon-reddit" width="100%" height="100%">
+      </div>
       <h1 class="navbar-item">
         Deviget
       </h1>
@@ -23,5 +26,10 @@ export default {
   .navbar-item {
     color: #fff;
     font-weight: bold;
+  }
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
   }
 </style>

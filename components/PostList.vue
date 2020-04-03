@@ -2,6 +2,7 @@
   <div style="margin-top: 6px">
     <div v-for="post in posts" :key="JSON.stringify(post.title)">
       <post :post="post" />
+      <div class="line"></div>
     </div>
   </div>
 </template>
@@ -59,5 +60,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .line {
+    border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>

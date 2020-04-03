@@ -20,6 +20,7 @@ const storeCreate = {
     return {
       tops: [],
       next: null,
+      selectedPost: null,
     };
   },
 
@@ -29,6 +30,9 @@ const storeCreate = {
     },
     setNextPage(localState, data) {
       Vue.set(localState, 'next', data);
+    },
+    setSelectedPost(localState, data) {
+      Vue.set(localState, 'selectedPost', data);
     },
     addPosts(localState, data) {
       const tops = [...localState.tops, ...data];
@@ -66,6 +70,10 @@ const storeCreate = {
       } catch (error) {
         console.error(error);
       }
+    },
+    setSelectedPost({ commit }, data) {
+      // commit('updateStatus', data);
+      commit('setSelectedPost', data);
     },
   },
 };
