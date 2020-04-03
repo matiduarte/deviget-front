@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 6px">
+  <div>
     <div v-for="post in posts" :key="JSON.stringify(post.title)">
       <post :post="post" />
       <div class="line"></div>
