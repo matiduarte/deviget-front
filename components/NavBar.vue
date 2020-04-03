@@ -22,5 +22,6 @@ export default {
   }
   .navbar-item {
     color: #fff;
+    font-weight: bold;
   }
 </style>

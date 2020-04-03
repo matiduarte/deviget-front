@@ -30,6 +30,10 @@ const storeCreate = {
     setNextPage(localState, data) {
       Vue.set(localState, 'next', data);
     },
+    addPosts(localState, data) {
+      const tops = [...localState.tops, ...data];
+      Vue.set(localState, 'tops', tops);
+    },
   },
 
   actions: {
@@ -37,12 +41,28 @@ const storeCreate = {
       try {
         const {
           data: {
-            data: { children, after: next },
+            data: { children, after },
           },
-        } = await request('GET', 'top.json');
+        } = await request('GET', 'top.json?limit=10');
         const tops = mapDataToTops(children);
         commit('setTopPost', tops);
-        commit('setNextPage', next);
+        commit('setNextPage', after);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async loadPosts({ commit, state: localState }) {
+      try {
+        const { next } = localState;
+        console.log(localState);
+        const {
+          data: {
+            data: { children, after },
+          },
+        } = await request('GET', `top.json?limit=10&after=${next}`);
+        const tops = mapDataToTops(children);
+        commit('addPosts', tops);
+        commit('setNextPage', after);
       } catch (error) {
         console.error(error);
       }
