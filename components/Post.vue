@@ -1,9 +1,9 @@
 <template>
   <div class="post-card" :class="{'dismiss-card': dismiss}" @click="setPost(post)">
-    <div class="card-img">
+    <div class="card-img" :style="{display: !dismiss ? 'block' : 'none'}">
       <img v-lazy="post.thumbnail" :alt="post.title" height="100%" width="100%">
     </div>
-    <div class="post-card-content">
+    <div class="post-card-content" :style="{display: !dismiss ? 'block' : 'none'}">
       <div class="post-header">
         <div :class="{'read-status': !read}" />
         <div style="line-height: 14px">
@@ -19,7 +19,7 @@
       <div class="post-title">
         {{ post.title }}
       </div>
-      <div class="post-comments">
+      <div class="post-comments" :style="{display: !dismiss ? 'block' : 'none'}">
         {{ `${post.comments} comments` }}
       </div>
     </div>
@@ -59,6 +59,7 @@ export default {
 </script>
 
 <style scoped>
+
   .post-card {
     transition: height 0.2s ease-out;
     height: 110px;

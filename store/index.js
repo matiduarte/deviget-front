@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import request from '../utils/ajax.js';
+import fixGifExtension from '../utils/imageUtil';
 
 const mapDataToTops = (data) => {
   return data.map(({
@@ -17,7 +18,7 @@ const mapDataToTops = (data) => {
     comments,
     created,
     thumbnail,
-    image: url,
+    image: fixGifExtension(url),
     hasImage: url.match(/[^/]+(jpg|jpeg|png|gif|gifv)$/),
   }));
 };
@@ -28,6 +29,7 @@ const storeCreate = {
       tops: [],
       next: null,
       selectedPost: null,
+      images: [], // Saved images from user
     };
   },
 
@@ -41,6 +43,11 @@ const storeCreate = {
     addPosts(localState, data) {
       const tops = [...localState.tops, ...data];
       Vue.set(localState, 'tops', tops);
+    },
+    saveImage(localState, data) {
+      const { images } = localState;
+      images.push(data);
+      Vue.set(localState, 'images', images);
     },
   },
 
@@ -63,6 +70,9 @@ const storeCreate = {
     },
     setSelectedPost({ commit }, data) {
       commit('setSelectedPost', data);
+    },
+    saveImages({ commit }, data) {
+      commit('saveImage', data);
     },
   },
 };

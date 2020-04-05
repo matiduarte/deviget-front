@@ -56,7 +56,9 @@ export default {
 .links {
   padding-top: 15px;
 }
-
+a {
+  color: white;
+}
 </style>
 
 <style scoped>
