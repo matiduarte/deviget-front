@@ -1,6 +1,9 @@
 <template>
   <div v-if="selectedPost">
     <div class="detail-card">
+      <div style="color: red">
+        {{ selectedPost.hasImage ? 'SI' : 'NO' }}
+      </div>
       <div class="title-card">
         {{ selectedPost.title }}
       </div>
@@ -11,17 +14,19 @@
           :alt="selectedPost.title"
           height="100%"
           width="100%"
-          @click="showModal =! showModal"
+          @click="showImage"
         >
       </div>
       <div class="detail-container">
         <div class="author">
           {{ `Posted by ${selectedPost.author}` }}
         </div>
-        <div class="comments">{{ `${selectedPost.comments} comments` }}</div>
+        <div class="comments">
+          {{ `${selectedPost.comments} comments` }}
+        </div>
       </div>
     </div>
-    <modal-image :url="selectedPost.image" :visibility="showModal" @close-modal="showModal = false" />
+    <modal-image :url="getImage" :visibility="showModal" @close-modal="showModal = false" />
   </div>
 </template>
 
@@ -41,6 +46,19 @@ export default {
   },
   computed: {
     ...mapState(['selectedPost']),
+    getImage() {
+      const { image } = this.selectedPost;
+      // Fix gifv extension
+      return image.includes('gifv') ? image.replace('gifv', 'gif') : image;
+    },
+  },
+  methods: {
+    showImage() {
+      const { hasImage } = this.selectedPost;
+      if (hasImage) {
+        this.showModal = true;
+      }
+    },
   },
 };
 </script>

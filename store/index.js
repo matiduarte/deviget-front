@@ -12,7 +12,13 @@ const mapDataToTops = (data) => {
       url,
     },
   }) => ({
-    title, author, comments, created, thumbnail, image: url,
+    title,
+    author,
+    comments,
+    created,
+    thumbnail,
+    image: url,
+    hasImage: url.match(/[^/]+(jpg|jpeg|png|gif|gifv)$/),
   }));
 };
 
@@ -49,7 +55,6 @@ const storeCreate = {
           },
         } = await request('GET', `top.json?limit=10${pagination}`);
         const tops = mapDataToTops(children);
-        console.log(tops);
         commit('addPosts', tops);
         commit('setNextPage', after);
       } catch (error) {
