@@ -17,7 +17,7 @@ export default {
     PostDetail,
   },
   async asyncData({ store: { dispatch } }) {
-    return dispatch('getTopPosts');
+    return dispatch('loadPosts');
   },
   computed: {
     ...mapState(['tops']),

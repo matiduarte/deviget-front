@@ -1,14 +1,16 @@
 <template>
-  <div class="post-card" @click="setPost(post)">
+  <div class="post-card" :class="{'dismiss-card': dismiss}" @click="setPost(post)">
     <div class="card-img">
       <img v-lazy="post.thumbnail" :alt="post.title" height="100%" width="100%">
     </div>
     <div class="post-card-content">
       <div class="post-header">
-        <div :class="{'read-status': !post.read}"></div>
+        <div :class="{'read-status': !post.read}" />
         <div>{{ `Posted by ${post.author}` }}</div>&nbsp;
         <div>{{ `${createdPost} hours ago` }}</div>
-        <div class="close-btn">&times;</div>
+        <div class="close-btn" @click.stop.prevent="dismiss = true">
+          &times;
+        </div>
       </div>
       <div class="post-title">
         {{ post.title }}
@@ -27,6 +29,11 @@ export default {
   name: 'Post',
   props: {
     post: { type: Object, default: null },
+  },
+  data() {
+    return {
+      dismiss: false,
+    };
   },
   computed: {
     createdPost() {
@@ -47,6 +54,7 @@ export default {
 
 <style scoped>
   .post-card {
+    transition: all 0.2s ease-out;
     min-height: 110px;
     max-height: 110px;
     display: flex;
@@ -99,7 +107,13 @@ export default {
     cursor: pointer;
     margin-left: auto;
     margin-right: 10px;
-    font-size: 18px;
+    font-size: 21px;
+    z-index: 5;
+  }
+
+  .dismiss-card {
+    transform: translate(-150%);
+    -webkit-transform: translate(-150%);
   }
 
   .close-btn:hover {color: #000;}

@@ -9,9 +9,10 @@ const mapDataToTops = (data) => {
       created,
       num_comments: comments,
       thumbnail,
+      url,
     },
   }) => ({
-    title, author, comments, created, read: false, thumbnail,
+    title, author, comments, created, read: false, thumbnail, image: url,
   }));
 };
 
@@ -41,29 +42,15 @@ const storeCreate = {
   },
 
   actions: {
-    async getTopPosts({ commit }) {
-      try {
-        const {
-          data: {
-            data: { children, after },
-          },
-        } = await request('GET', 'top.json?limit=10');
-        const tops = mapDataToTops(children);
-        commit('setTopPost', tops);
-        commit('setNextPage', after);
-      } catch (error) {
-        console.error(error);
-      }
-    },
     async loadPosts({ commit, state: localState }) {
       try {
         const { next } = localState;
-        console.log(localState);
+        const pagination = next ? `&after=${next}` : '';
         const {
           data: {
             data: { children, after },
           },
-        } = await request('GET', `top.json?limit=10&after=${next}`);
+        } = await request('GET', `top.json?limit=10${pagination}`);
         const tops = mapDataToTops(children);
         commit('addPosts', tops);
         commit('setNextPage', after);
