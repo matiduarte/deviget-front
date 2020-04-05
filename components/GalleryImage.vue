@@ -8,7 +8,7 @@
         <img v-lazy="image" :alt="image">
       </div>
     </div>
-    <div v-if="!images.length">
+    <div style="text-align: center" v-if="!images.length">
       No images were found
     </div>
   </div>
