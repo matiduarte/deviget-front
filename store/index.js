@@ -12,7 +12,7 @@ const mapDataToTops = (data) => {
       url,
     },
   }) => ({
-    title, author, comments, created, read: false, thumbnail, image: url,
+    title, author, comments, created, thumbnail, image: url,
   }));
 };
 
@@ -26,9 +26,6 @@ const storeCreate = {
   },
 
   mutations: {
-    setTopPost(localState, data) {
-      Vue.set(localState, 'tops', data);
-    },
     setNextPage(localState, data) {
       Vue.set(localState, 'next', data);
     },
@@ -59,7 +56,6 @@ const storeCreate = {
       }
     },
     setSelectedPost({ commit }, data) {
-      // commit('updateStatus', data);
       commit('setSelectedPost', data);
     },
   },

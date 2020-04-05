@@ -2,7 +2,7 @@
   <div v-if="selectedPost">
     <div class="detail-card">
       <div>
-        <img :src="selectedPost.image" :alt="selectedPost.title" style="width:100%">
+        <img v-lazy="selectedPost.thumbnail" :alt="selectedPost.title" style="width:100%">
       </div>
       <div class="detail-container">
         <h4><b>{{ selectedPost.title }}</b></h4>

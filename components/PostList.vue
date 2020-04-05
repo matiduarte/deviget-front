@@ -2,8 +2,7 @@
   <div>
     <div v-for="post in posts" :key="JSON.stringify(post.title)">
       <div class="card-transition" :class="{'dismiss-all': dismissAll}">
-        <post :post="post" @dismiss="dismiss = true" />
-        <div class="line" />
+        <post :post="post" />
       </div>
     </div>
     <div class="btn-footer" @click="dismissAllCards()">
@@ -55,7 +54,7 @@ export default {
     window.removeEventListener('scroll', this.scrollEvent);
   },
   methods: {
-    ...mapActions(['loadPosts']),
+    ...mapActions(['loadPosts', 'setSelectedPost']),
     scrollEvent() {
       this.bottom = this.bottomVisible();
     },
@@ -67,7 +66,7 @@ export default {
       return bottomOfPage || pageHeight < visible;
     },
     dismissAllCards() {
-      console.log(this.dismissAll);
+      this.setSelectedPost(null);
       this.dismissAll = !this.dismissAll;
     },
   },
@@ -78,13 +77,13 @@ export default {
   .btn-footer {
     display: block;
     background: #FF5700;
-    height: 40px;
+    height: 45px;
+    padding-top: 12px;
     text-align: center;
-    padding-top: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     z-index: 6;
@@ -93,12 +92,6 @@ export default {
   }
   .btn-footer:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  .line {
-    border-bottom: 1px solid rgba(51, 51, 51, 0.2);
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
   }
   .card-transition {
     transition: all 0.2s ease-out;

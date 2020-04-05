@@ -5,7 +5,7 @@
     </div>
     <div class="post-card-content">
       <div class="post-header">
-        <div :class="{'read-status': !post.read}" />
+        <div :class="{'read-status': !read}" />
         <div>{{ `Posted by ${post.author}` }}</div>&nbsp;
         <div>{{ `${createdPost} hours ago` }}</div>
         <div class="close-btn" @click.stop.prevent="dismiss = true">
@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       dismiss: false,
+      read: false,
     };
   },
   computed: {
@@ -46,6 +47,7 @@ export default {
   methods: {
     ...mapActions(['setSelectedPost']),
     setPost(post) {
+      this.read = true;
       this.setSelectedPost(post);
     },
   },
@@ -55,14 +57,16 @@ export default {
 <style scoped>
   .post-card {
     transition: all 0.2s ease-out;
-    min-height: 110px;
-    max-height: 110px;
+    height: 110px;
     display: flex;
     align-items: center;
     background-color: #fff;
     cursor: pointer;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.2);
   }
   .post-card-content {
+    display: flex;
+    flex-direction: column;
     padding: 5px 10px;
     flex: 1;
     align-self: stretch;
@@ -73,6 +77,8 @@ export default {
     height: auto;
   }
   .post-title {
+    margin-top: auto;
+    margin-bottom: auto;
     font-weight: bold;
     font-size: 15px;
     line-height: 18px;
@@ -91,14 +97,15 @@ export default {
     color: rgb(120, 124, 126);
   }
   .post-comments {
-    align-self: flex-end;
     font-size: 12px;
     font-weight: bold;
     color: #447ac4;
+    margin-top: auto;
+    margin-bottom: 10px;
   }
   .read-status {
-    height: 8px;
-    width: 8px;
+    height: 11px;
+    width: 11px;
     margin-right: 4px;
     border-radius: 50%;
     background-color: #44c7c7;
