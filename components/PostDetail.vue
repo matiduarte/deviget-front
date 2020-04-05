@@ -64,6 +64,7 @@ export default {
     },
     saveToGallery(url) {
       if (!this.images.includes(url)) {
+        this.snackMessage = 'Saved to gallery';
         this.saveImages(url);
       } else {
         this.snackMessage = 'Image already exists';

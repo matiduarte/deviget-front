@@ -34,7 +34,7 @@ export default {
     font-weight: bold;
   }
   .navbar-item:hover {
-    color: #B1B1B1;
+    color: #FAFAFA;
   }
   .sticky-header {
     position: sticky;
