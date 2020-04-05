@@ -49,6 +49,7 @@ const storeCreate = {
           },
         } = await request('GET', `top.json?limit=10${pagination}`);
         const tops = mapDataToTops(children);
+        console.log(tops);
         commit('addPosts', tops);
         commit('setNextPage', after);
       } catch (error) {

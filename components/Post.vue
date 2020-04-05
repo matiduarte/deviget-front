@@ -6,8 +6,12 @@
     <div class="post-card-content">
       <div class="post-header">
         <div :class="{'read-status': !read}" />
-        <div>{{ `Posted by ${post.author}` }}</div>&nbsp;
-        <div>{{ `${createdPost} hours ago` }}</div>
+        <div style="line-height: 14px">
+          {{ `Posted by ${post.author}` }}
+        </div>&nbsp;
+        <div style="line-height: 14px">
+          {{ `${createdPost} hours ago` }}
+        </div>
         <div class="close-btn" @click.stop.prevent="dismiss = true">
           &times;
         </div>
@@ -56,7 +60,7 @@ export default {
 
 <style scoped>
   .post-card {
-    transition: all 0.2s ease-out;
+    transition: height 0.2s ease-out;
     height: 110px;
     display: flex;
     align-items: center;
@@ -113,14 +117,12 @@ export default {
   .close-btn {
     cursor: pointer;
     margin-left: auto;
-    margin-right: 10px;
     font-size: 21px;
     z-index: 5;
   }
 
   .dismiss-card {
-    transform: translate(-150%);
-    -webkit-transform: translate(-150%);
+    height: 0;
   }
 
   .close-btn:hover {color: #000;}
