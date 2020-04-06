@@ -1,11 +1,11 @@
 <template>
   <div class="post-card" :class="{'dismiss-card': dismiss}" @click="setPost(post)">
-    <div class="card-img" :style="{display: !dismiss ? 'block' : 'none'}">
-      <img v-lazy="post.thumbnail" :alt="post.title" height="100%" width="100%">
+    <div class="card-img">
+      <img v-lazy="post.thumbnail" :alt="post.title" style="border-radius: 5px" height="100%" width="100%">
     </div>
     <div class="post-card-content" :style="{display: !dismiss ? 'block' : 'none'}">
       <div class="post-header">
-        <div :class="{'read-status': !read}" />
+        <div :class="{'read-status': !post.read}" />
         <div style="line-height: 14px">
           {{ `Posted by ${post.author}` }}
         </div>&nbsp;
@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       dismiss: false,
-      read: false,
     };
   },
   computed: {
@@ -49,9 +48,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setSelectedPost']),
+    ...mapActions(['setSelectedPost', 'markAsRead']),
     setPost(post) {
-      this.read = true;
+      this.markAsRead(post);
       this.setSelectedPost(post);
     },
   },
@@ -77,6 +76,7 @@ export default {
     align-self: stretch;
   }
   .card-img {
+    display: flex;
     width: 100px;
     min-width: 100px;
     height: auto;

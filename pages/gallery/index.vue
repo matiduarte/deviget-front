@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery-container">
+  <div>
     <gallery-image :images="images" />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="post in posts" :key="JSON.stringify(post.title)">
+    <div v-for="(post, index) in posts" :key="JSON.stringify(`${index}${post.title}`)">
       <div class="card-transition" :class="{'dismiss-all': dismissAll}">
         <post :post="post" />
       </div>

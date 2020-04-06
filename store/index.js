@@ -20,6 +20,7 @@ const mapDataToTops = (data) => {
     thumbnail,
     image: fixGifExtension(url),
     hasImage: url.match(/[^/]+(jpg|jpeg|png|gif|gifv)$/),
+    read: false,
   }));
 };
 
@@ -48,6 +49,10 @@ const storeCreate = {
       const images = [...localState.images, data];
       Vue.set(localState, 'images', images);
     },
+    markAsRead(localState, data) {
+      const postIndex = localState.tops.findIndex((t) => t.created === data.created);
+      Vue.set(localState.tops, postIndex, { ...data, read: true });
+    },
   },
 
   actions: {
@@ -72,6 +77,9 @@ const storeCreate = {
     },
     saveImages({ commit }, data) {
       commit('saveImage', data);
+    },
+    markAsRead({ commit }, data) {
+      commit('markAsRead', data);
     },
   },
 };
