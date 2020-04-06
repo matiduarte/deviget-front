@@ -82,6 +82,7 @@ export default {
     display: flex;
     width: 100px;
     min-width: 100px;
+    max-height: 100px;
     height: auto;
   }
   .post-title {
