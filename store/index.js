@@ -19,7 +19,7 @@ const mapDataToTops = (data) => {
     created,
     thumbnail,
     image: fixGifExtension(url),
-    hasImage: url.match(/[^/]+(jpg|jpeg|png|gif|gifv)$/),
+    hasImage: url.match(/[^/]+(jpg|jpeg|png|gif|gifv)$/) !== null,
     read: false,
   }));
 };

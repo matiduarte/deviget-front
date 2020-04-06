@@ -47,6 +47,9 @@ export default {
       return Math.round(Math.abs(postTime - dateNow) / 36e5);
     },
   },
+  mounted() {
+    console.log(JSON.stringify(this.post, null, 2));
+  },
   methods: {
     ...mapActions(['setSelectedPost', 'markAsRead', 'deletePost']),
     setPost(post) {
@@ -54,7 +57,6 @@ export default {
       this.setSelectedPost(post);
     },
     dismissPost(post) {
-      // this.dismiss = true;
       this.deletePost(post);
     },
   },
