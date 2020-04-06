@@ -45,8 +45,7 @@ const storeCreate = {
       Vue.set(localState, 'tops', tops);
     },
     saveImage(localState, data) {
-      const { images } = localState;
-      images.push(data);
+      const images = [...localState.images, data];
       Vue.set(localState, 'images', images);
     },
   },
