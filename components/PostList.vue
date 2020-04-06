@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div v-for="(post, index) in posts" :key="JSON.stringify(`${index}${post.title}`)">
-      <div class="card-transition" :class="{'dismiss-all': dismissAll}">
-        <post :post="post" />
+    <transition-group name="fade">
+      <div v-for="post in posts" :key="post.created">
+        <div class="card-transition" :class="{'dismiss-all': dismissAll}">
+          <post :post="post" />
+        </div>
       </div>
-    </div>
+    </transition-group>
     <div class="btn-footer" @click="dismissAllCards()">
       {{ `${textBtn} all` }}
     </div>
@@ -74,6 +76,14 @@ export default {
 </script>
 
 <style scoped>
+  .fade-leave-active {
+    transition: all 1s;
+  }
+
+  .fade-leave-to {
+    opacity: 0;
+  }
+
   .btn-footer {
     display: block;
     background: #FF5700;

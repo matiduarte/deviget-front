@@ -1,5 +1,5 @@
 <template>
-  <div class="post-card" :class="{'dismiss-card': dismiss}" @click="setPost(post)">
+  <div class="post-card" @click="setPost(post)">
     <div class="card-img">
       <img v-lazy="post.thumbnail" :alt="post.title" style="border-radius: 5px" height="100%" width="100%">
     </div>
@@ -12,14 +12,14 @@
         <div style="line-height: 14px">
           {{ `${createdPost} hours ago` }}
         </div>
-        <div class="close-btn" @click.stop.prevent="dismiss = true">
+        <div class="close-btn" @click.stop.prevent="dismissPost(post)">
           &times;
         </div>
       </div>
       <div class="post-title">
         {{ post.title }}
       </div>
-      <div class="post-comments" :style="{display: !dismiss ? 'block' : 'none'}">
+      <div class="post-comments">
         {{ `${post.comments} comments` }}
       </div>
     </div>
@@ -48,10 +48,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setSelectedPost', 'markAsRead']),
+    ...mapActions(['setSelectedPost', 'markAsRead', 'deletePost']),
     setPost(post) {
       this.markAsRead(post);
       this.setSelectedPost(post);
+    },
+    dismissPost(post) {
+      // this.dismiss = true;
+      this.deletePost(post);
     },
   },
 };
@@ -60,7 +64,6 @@ export default {
 <style scoped>
 
   .post-card {
-    transition: all 0.4s ease;
     height: 110px;
     display: flex;
     align-items: center;
@@ -121,12 +124,5 @@ export default {
     font-size: 21px;
     z-index: 5;
   }
-
-  .dismiss-card {
-    transform: translate(-150%);
-    -webkit-transform: translate(-150%);
-    height: 0;
-  }
-
   .close-btn:hover {color: #000;}
 </style>

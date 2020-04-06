@@ -53,6 +53,15 @@ const storeCreate = {
       const postIndex = localState.tops.findIndex((t) => t.created === data.created);
       Vue.set(localState.tops, postIndex, { ...data, read: true });
     },
+    deletePost(localState, data) {
+      const postIndex = localState.tops.findIndex((t) => t.created === data.created);
+      const { selectedPost } = localState;
+      // If the post is select, it has to be removed
+      if (selectedPost && (selectedPost.created === data.created)) {
+        Vue.set(localState, 'selectedPost', null);
+      }
+      Vue.delete(localState.tops, postIndex);
+    },
   },
 
   actions: {
@@ -80,6 +89,9 @@ const storeCreate = {
     },
     markAsRead({ commit }, data) {
       commit('markAsRead', data);
+    },
+    deletePost({ commit }, data) {
+      commit('deletePost', data);
     },
   },
 };
