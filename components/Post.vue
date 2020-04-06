@@ -3,7 +3,7 @@
     <div class="card-img">
       <img v-lazy="post.thumbnail" :alt="post.title" style="border-radius: 5px" height="100%" width="100%">
     </div>
-    <div class="post-card-content" :style="{display: !dismiss ? 'block' : 'none'}">
+    <div class="post-card-content">
       <div class="post-header">
         <div :class="{'read-status': !post.read}" />
         <div style="line-height: 14px">
@@ -60,7 +60,7 @@ export default {
 <style scoped>
 
   .post-card {
-    transition: height 0.2s ease-out;
+    transition: all 0.4s ease;
     height: 110px;
     display: flex;
     align-items: center;
@@ -123,6 +123,8 @@ export default {
   }
 
   .dismiss-card {
+    transform: translate(-150%);
+    -webkit-transform: translate(-150%);
     height: 0;
   }
 

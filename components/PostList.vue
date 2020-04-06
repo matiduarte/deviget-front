@@ -95,7 +95,7 @@ export default {
   }
 
   .card-transition {
-    transition: all 0.2s ease-out;
+    transition: all 0.5s ease;
   }
   .dismiss-all {
     transform: translate(-150%);
