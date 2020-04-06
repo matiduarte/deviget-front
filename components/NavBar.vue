@@ -1,9 +1,6 @@
 <template>
   <nav class="sticky-header navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand" style="align-items: center; flex: 1;">
-      <div class="img-icon" style="margin-left: 5px">
-        <img src="../assets/reddit.png" alt="icon-reddit" width="100%" height="100%">
-      </div>
       <nuxt-link to="/" class="navbar-item">
         Deviget
       </nuxt-link>
